@@ -1,0 +1,111 @@
+*{
+    box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before{
+    box-sizing: inherit;
+}
+
+body{
+    color:#181818;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    letter-spacing: 0.8px;
+    font-size: 18px;
+}
+
+.container{
+    margin: 0 auto;
+    max-width: 1220px;
+    padding: 0 10px; 
+}
+
+.main_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px #ccc;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
+
+.title{
+    color: rgb(89, 203, 223);
+    text-align: center;
+    font-size: 35px;
+}
+
+.warning-label{
+    display: none;
+    font-size: 13px;
+    color: red;
+}
+
+.submit{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color:#fff;
+    background-color: #0071f0;
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.3s;
+    margin-top:15px;
+}
+
+.submit:hover{
+    background-color: #1a73a8;
+}
+
+.main_input{
+    height: 23px;
+    border:none;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    outline: none;
+    transition: 0.3s;
+    margin-top:15px;
+    font-size: 16px;
+}
+
+.main_input:focus{
+    border-bottom: 1px solid #1a73a8!important;
+}
+
+.not_authorized_link{
+    color: rgb(163, 160, 160);
+    text-align: center;
+    margin-top:15px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  transition: background-color 5000s ease-in-out 0s;
+  outline: none;
+}
+
+
+.edit_input{
+    height: 600px;
+    width:600px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    outline: none;
+    transition: 0.3s;
+    margin-top:15px;
+    font-size: 16px;
+    resize: none;
+    padding: 10px
+}

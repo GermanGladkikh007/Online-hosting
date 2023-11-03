@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First site</title>
+    <link rel="stylesheet" href="/css/reg.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main_form" name="register">
+            <h1 class="title">Registration</h1>
+            <input type="text" name="login" id="login-id" placeholder="login" class="main_input login">
+            <input type="email" name="mail_reg" id="mail-reg-id" placeholder="mail" class="main_input mail">
+            <label for="email" class="warning-label label_mail">Введенный mail не существует!</label>
+            <input type="password" name="pass1" id="pass1" placeholder="password" class="main_input pass">
+            <input type="password" name="pass2" id="pass2" placeholder="password again"class="main_input pass">
+            <label for="email" class="warning-label label_all">Пароли не совпадают!</label>
+            <button class="submit" id="submit_form">Registration</button>
+            <a href="/sign-in" class="not_authorized_link">Sign-in</a>
+            
+        </div>
+
+    </div>
+
+    <script src="/js/form.js"></script>
+</body>
+</html>

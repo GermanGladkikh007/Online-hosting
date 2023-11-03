@@ -1,0 +1,39 @@
+.header{
+    padding-top: 23px;
+    padding-bottom: 23px;
+    background: var(--gradient-light, linear-gradient(180deg, #c7ffee 0%, rgba(217, 217, 217, 0.00) 100%));
+    border-bottom:#ececec 1px solid;rgb(35, 108, 192);
+}
+
+.nav{
+    display: flex;
+    align-content: space-between;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    gap: 0 40px;
+    align-items: center;
+}
+
+.menu{
+    display: flex;
+    justify-content: space-between;
+    gap: 0 40px;
+    align-items: center;
+}
+
+.profile-img{
+    width: 40px;
+    height: 40px;
+}
+
+.menu-link{
+    color:#808080;
+    text-decoration: none; 
+}
+
+.logo{
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    margin-right:100px;
+}
