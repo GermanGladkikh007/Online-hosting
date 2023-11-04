@@ -62,8 +62,14 @@ function urlToType(u){
             return ["text/html", "/html/google-sign.html"] 
         case "/edit": 
             return ["text/html", "/html/edit.html"] 
+        case "/menu": 
+            return ["text/js", "/html/menu.html"]
         case "/css/main.css": 
             return ["text/css", "/css/main.css"] 
+        case "/css/menu.css": 
+            return ["text/css", "/css/menu.css"] 
+        case "/css/reset.css": 
+            return ["text/css", "/css/reset.css"] 
         case "/css/sign.css": 
             return ["text/css", "/css/sign.css"]
         case "/css/ver.css": 
@@ -72,6 +78,8 @@ function urlToType(u){
             return ["text/css", "/css/reg.css"]  
         case "/css/404.css": 
             return ["text/css", "/css/reg.css"] 
+        case "/css/edit.css": 
+            return ["text/css", "/css/edit.css"] 
         case "/js/form.js": 
             return ["text/js", "/js/form.js"] 
         case "/js/verify.js": 
@@ -85,7 +93,7 @@ function urlToType(u){
         case "/images/profile.svg": 
             return ["image/svg+xml", "/images/profile.svg"] 
         default: 
-            return ["text/html", "/html/404.html"] 
+            return ["text/html", "/html/404.html"]  
     }
 }
 
