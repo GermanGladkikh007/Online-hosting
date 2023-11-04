@@ -1,7 +1,7 @@
 .header{
     padding-top: 23px;
     padding-bottom: 23px;
-    background: var(--gradient-light, linear-gradient(180deg, #c7ffee 0%, rgba(217, 217, 217, 0.00) 100%));
+    background: var(--gradient-light, linear-gradient(180deg, #d5fff2 0%, rgba(217, 217, 217, 0.00) 100%));
     border-bottom:#ececec 1px solid;rgb(35, 108, 192);
 }
 
