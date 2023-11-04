@@ -80,6 +80,10 @@ function urlToType(u){
             return ["text/js", "/js/sign.js"] 
         case "/js/edit.js": 
             return ["text/js", "/js/edit.js"] 
+        case "/js/menu.js": 
+            return ["text/js", "/js/menu.js"] 
+        case "/images/profile.svg": 
+            return ["image/svg+xml", "/images/profile.svg"] 
         default: 
             return ["text/html", "/html/404.html"] 
     }
