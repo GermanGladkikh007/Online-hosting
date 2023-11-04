@@ -10,7 +10,7 @@ document.getElementById('submit_verify').onclick = () => {
     xhr.onreadystatechange = () => {
         if(xhr.status == 200 && xhr.readyState == 4){
             if(JSON.parse(xhr.response) == "regist"){
-                window.location.href = "/registration"
+                window.location.href = "/edit"
             }else if(JSON.parse(xhr.response) == "unregist"){
                 document.querySelector('.label_verify').style.display = "inherit"
                 all_field.style.borderBottom = "1px solid red"
