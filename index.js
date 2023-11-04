@@ -26,9 +26,9 @@ transporter.verify(function (error, success) {
 
 const connection = mysql.createConnection({
     host:"localhost",
-    user:"root",
-    password:"12345",
-    database: "database",
+    user:"user",
+    password:"Everybody123__",
+    database: "db",
     port:"3306"
 })
 
