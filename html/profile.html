@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+    <header id="menu"></header>
+    <main class="main">
+        <div class="container">
+            <div class="profile-main-inner">
+                <div class="login-inner">
+                    <h1 class="profile-login" id="title-login">
+                        <script>
+                            let login = localStorage.getItem("login")
+                            document.getElementById('title-login').innerHTML = login.replace(/"/g, "")
+                        </script>
+                    </h1>
+                    <button class="profile-button change-login-button" id="change-login">Изменить логин</button>
+                    <div class="change-login">
+                        <input type="text" name="login" id="login-input" class="profile-input" placeholder="New login">
+                        <label for="login-input" id="label-login" class="label"></label>
+                        <input type="submit" class="profile-button confirm-button" id="confirm-login" value="Изменить">
+                        <button class="profile-button confirm-button" id="hide-login">Скрыть</button>
+                    </div>  
+                </div>
+                
+                <div class="basic">
+                    <h3 class="basic-info-title">Основная информация</h3>
+
+                    <table class="basic-info">
+                        <tr id="mail">
+                            <td>Mail</td>
+                            <td id="mail-info">
+                                <script>
+                                    let mail = localStorage.getItem("mail")
+                                    document.getElementById("mail-info").innerHTML = mail
+                                </script>
+                            </td>
+                        </tr>
+                        <tr id="password">
+                            <td>Password</td>
+                            <td id="pass_value">
+                                <script>
+                                    let length = Number(localStorage.getItem("pass"))
+                                    let pass
+                                    for(let i = 0; i < length; i++){pass = pass + "*"} 
+                                    document.getElementById('pass_value').innerHTML = pass.replace("undefined","")
+                                </script>
+                            </td>
+                            <td>
+                                <button class="profile-button change-pass-button" id="change-password">Изменить пароль</button>
+                            </td>
+                            
+                        </tr>
+                        <tr class="pass-inner">
+                            <td class="change-pass">
+                                <div class="change-pass-form">
+                                    <input type="password" name="pass" id="pass0" autocomplete="new-password" class="profile-input" placeholder="Current password">
+                                    <label for="pass" class="label" id="label-for-0">Неверный пароль</label>
+                                    <input type="password" name="pass1" id="pass1" autocomplete="new-password" class="profile-input" placeholder="New password">
+                                    <input type="password" name="pass2" id="pass2" autocomplete="new-password" class="profile-input" placeholder="New password again">
+                                    <label for="pass2" class="label" id="label-for-1">Пароли не совпадают</label>
+                                    <input type="submit" class="profile-button confirm-button" id="confirm-pass" value="Изменить">
+                                    <button class="profile-button confirm-button" id="hide-pass">Скрыть</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <button class="profile-button exit-button" id="exit">Выйти</button>
+            </div>
+        </div>
+    </main>
+    <script src="/js/profile.js"></script>
+    <script src="/js/menu.js"></script>
+</body>
+</html>

@@ -13,7 +13,11 @@
   "author": "German Gladkikh",
   "license": "ISC",
   "dependencies": {
+    "boring-webcrypto-sha256": "^1.0.0",
     "cheerio": "^1.0.0-rc.12",
+    "jquery": "^3.7.1",
+    "js-sha256": "^0.10.1",
+    "jsdom": "^22.1.0",
     "mysql": "^2.18.1",
     "nodemailer": "^6.9.6",
     "nodemon": "^3.0.1",

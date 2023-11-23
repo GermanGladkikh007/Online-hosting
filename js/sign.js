@@ -15,10 +15,7 @@ if(localMail != undefined){
             if(xhr.readyState == 4 && xhr.status == 200){
                 res = JSON.parse(xhr.response)
                 switch(res){
-                    case "sign":
-                        window.location.href = "/edit"
-                        localStorage.setItem("mail", mail)
-                        break
+                    
                     case "notsign":
                         label.style.display = "inherit"
                         label.innerHTML = "Неправильный пароль"
@@ -30,6 +27,12 @@ if(localMail != undefined){
                         label.innerHTML = "Неправильный логин"
                         mail_html.style.borderBottom = "1px solid red"
                         pass_html.style.borderBottom = "1px solid #ccc"
+                        break
+                    default:
+                        window.location.href = "/edit"
+                        localStorage.setItem("login", res.login)
+                        localStorage.setItem("pass", res.pass)
+                        localStorage.setItem("mail", mail)
                         break
                 }
             }

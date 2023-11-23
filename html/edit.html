@@ -3,21 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Hosting</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/edit.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <header id="menu"></header>
-    <div class="container">
-        <div class="inner">
-            <textarea type="text" name="code" id="code" class="edit_input"></textarea>
-            <input type="submit" value="Запустить" class="submit">
+    <main class="main">
+        <div class="container">
+            <div class="inner">
+                <div class="editor">
+                    <div class="line-numbers">
+                        <span></span>
+                    </div>
+                    <textarea type="text" name="code" class="editor" id="code" class="edit_input"></textarea>
+                    <script>
+                        const lineNumbers = document.querySelector('.line-numbers')
+                        const editor = document.getElementById('code')
+                        
+                        editor.addEventListener('keyup', event => {
+                            const numberOfLines = event.target.value.split('\n').length
+                        
+                            lineNumbers.innerHTML = Array(numberOfLines)
+                            .fill('<span></span>')
+                            .join('')
+                        })
+                    </script>
+                </div>
+                <input type="submit" value="Запустить" class="submit">
+            </div>
+            <h1 id="port"></h1>
         </div>
-    </div>
+    </main>
     <script src="/js/edit.js"></script>
     <script src="/js/menu.js"></script>
-
 </body>
 </html>
