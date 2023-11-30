@@ -114,13 +114,12 @@ async function Online(){
     let promise = new Promise((resolve,reject) => {
         
         setInterval(()=>{
-            console.log(true)
             for(let mail of Object.keys(users)){
                 if(users[mail].port != 0){
                     if(users[mail].online == true){
-                        console.log(mail + "online")
+                        // console.log(mail)
                     }else{
-                        users[mail].ls.on("SIGINT", ()=>{
+                        users[mail].ls.kill("SIGINT", ()=>{
                             users[mail].port = 0                
                         })
                     }
@@ -134,11 +133,11 @@ async function Online(){
     await promise.then()
 } // проверка онлайна у юзера
 
-let all_ports = Array(63000).fill(true)
+let all_ports = Array(63000).fill(true) // все существующие порты
 
 for(let i = 0; i <= 1000; i++){
         all_ports[i] = false
-}
+} // все порты до 1000 запрещаем
 
 function setPort(){
     for(let i = 0; i <= all_ports.length; i++){
@@ -146,10 +145,21 @@ function setPort(){
             return i
         }
     }
+} // установка свободного порта
+
+function redirectToLogin(res, mail){
+    if(users[mail] == undefined){
+        sendData("login",res)
+        return true
+        
+    }else{
+        return false
+    }
 }
 
-
 let codes = [] // list of Verify class objects
+
+// Online() 
 
 Online()
 
@@ -157,6 +167,7 @@ const server = http.createServer((req,res) =>{
 
     // GET
     if(req.method=='GET'){
+        
         getPage(req.url,res) 
 
     } 
@@ -269,7 +280,7 @@ const server = http.createServer((req,res) =>{
                                     let select_login = Object.values(Object.values(result)[0])[0];
                                     let info = {
                                         login : select_login,
-                                        pass : passFromDb.length
+                                        pass : passFromDb
                                     }
                                     console.log(info.login + " " + info.pass)
                                     sendData(info, res)
@@ -284,25 +295,81 @@ const server = http.createServer((req,res) =>{
 
             }
             
+            if(parseUrl(req.url) == '/change-login'){
+                let mail = post.mail
+                let new_login = post.login
+
+                if(redirectToLogin(res,mail)){
+                    return
+                }
+
+                let query = `UPDATE users SET login = '${new_login}' WHERE mail = '${mail}';`
+                connection.query(query, (err,result) => {
+                    if(err) throw err 
+                    sendData("OK", res)
+                })
+            }
+
+            if(parseUrl(req.url) == '/now-pass'){
+                let pass = post.pass
+                let mail = post.mail
+
+                if(redirectToLogin(res,mail)){
+                    return
+                }
+
+                let query 
+                = `SELECT pass FROM users WHERE mail IN("${mail}");`
+                connection.query(query, (err, result) => {
+                    if(err) throw err
+                    let passFromDb = Object.values(Object.values(result)[0])[0]
+                    if(pass == passFromDb){
+                        sendData("YES", res)
+                    }else{
+                        sendData("NO",res)
+                    }
+                })
+            }
+
+            if(parseUrl(req.url) == '/change-pass'){
+                let mail = post.mail
+                let new_pass = post.pass
+
+                if(redirectToLogin(res,mail)){
+                    return
+                }
+
+                let query = `UPDATE users SET pass = '${new_pass}' WHERE mail = '${mail}';`
+                connection.query(query, (err,result) => {
+                    if(err) throw err 
+                    sendData("OK", res)
+                })
+            }
+
             if(parseUrl(req.url) == '/edit'){
                 let code = post.code
                 let mail = post.mailcode
                 
+                if(redirectToLogin(res,mail)){
+                    return
+                }
                 
+                let port
                 let enter_port = code.includes(".listen(PORT")
-                if(enter_port){
+                if(enter_port){ 
                     console.log(users)
                     if(users[mail].port == 0){
-                        console.log(users)
                         port = setPort()
                         all_ports[port] = false
                         users[mail].port = port
-                    }
+                    } // если порта нет, то устанавливает новый и запрещаем его для других пользователей
 
-                    if(users[mail].ls != null){
-                        users[mail].ls.on("SIGINT", ()=>{})
+                    console.log(users[mail])
+                    
+                    /*if(users[mail].ls != null){
+                        users[mail].ls.kill("SIGINT", ()=>{})
                         console.log("nice")
-                    }
+                    }*/
 
                     code = code.replace("PORT", port.toString())
                     sendData("port: " + port.toString(),res)
@@ -332,51 +399,16 @@ const server = http.createServer((req,res) =>{
                     return 
                 }
             }
-            
-            
-            if(parseUrl(req.url) == '/change-login'){
-                let mail = post.mail
-                let new_login = post.login
-                let query = `UPDATE users SET login = '${new_login}' WHERE mail = '${mail}';`
-                connection.query(query, (err,result) => {
-                    if(err) throw err 
-                    sendData("OK", res)
-                })
-            }
-
-            if(parseUrl(req.url) == '/now-pass'){
-                let pass = post.pass
-                let mail = post.mail
-
-                let query 
-                = `SELECT pass FROM users WHERE mail IN("${mail}");`
-                connection.query(query, (err, result) => {
-                    if(err) throw err
-                    let passFromDb = Object.values(Object.values(result)[0])[0]
-                    if(pass == passFromDb){
-                        sendData("YES", res)
-                    }else{
-                        sendData("NO",res)
-                    }
-                })
-            }
-
-            if(parseUrl(req.url) == '/change-pass'){
-                let mail = post.mail
-                let new_pass = post.pass
-
-                let query = `UPDATE users SET pass = '${new_pass}' WHERE mail = '${mail}';`
-                connection.query(query, (err,result) => {
-                    if(err) throw err 
-                    sendData("OK", res)
-                })
-            }
 
             if(parseUrl(req.url) == "/online"){
                 let mail = post.mailonline
-                console.log(mail)
+                if(redirectToLogin(res,mail)){
+                    console.log("nice")
+                    return
+                }
                 if(mail != undefined){
                     users[mail].online = true
+                    
                 }
             }
 
